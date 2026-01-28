@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cost Seg Report Builder</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <div>
+        <h1>Cost Seg Report Builder</h1>
+        <p>Reuse an existing cost segregation report PDF as your template and quickly customize new property reports.</p>
+      </div>
+      <div class="status" id="status">Ready</div>
+    </header>
+
+    <main>
+      <section class="card">
+        <h2>1. Upload Template PDF</h2>
+        <form id="template-form">
+          <label>
+            Template Name
+            <input type="text" name="name" placeholder="235 Seasons Lane Template" />
+          </label>
+          <label>
+            Template PDF
+            <input type="file" name="template" accept="application/pdf" required />
+          </label>
+          <button type="submit">Save Template</button>
+        </form>
+        <div class="inline">
+          <label>
+            Existing Templates
+            <select id="template-select"></select>
+          </label>
+          <button id="refresh-templates" type="button">Refresh</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>2. Create New Property Report</h2>
+        <form id="create-report-form" class="inline">
+          <label>
+            Report Name
+            <input type="text" name="reportName" placeholder="New Property Report" />
+          </label>
+          <button type="submit">Create Report</button>
+        </form>
+      </section>
+
+      <section class="grid">
+        <div class="card">
+          <h2>3. Global Property Fields</h2>
+          <form id="fields-form" class="stack">
+            <label>Owner / Entity Name<input name="owner" /></label>
+            <label>Property Address<input name="address" /></label>
+            <label>Date of Report<input type="date" name="reportDate" /></label>
+            <label>Square Footage<input name="squareFootage" /></label>
+            <label>Lot Size<input name="lotSize" /></label>
+            <label>Placed-in-service Date<input name="placedInService" /></label>
+            <label>Total Cost Basis<input name="totalCostBasis" /></label>
+            <label>Land Value<input name="landValue" /></label>
+            <button type="submit">Save Fields</button>
+          </form>
+        </div>
+
+        <div class="card">
+          <h2>4. Toggle Sections</h2>
+          <div id="sections-list" class="stack"></div>
+        </div>
+      </section>
+
+      <section class="grid">
+        <div class="card">
+          <h2>5. Narrative + Find & Replace</h2>
+          <div class="stack">
+            <label>Summary Letter<textarea name="summary" rows="4"></textarea></label>
+            <label>Methodology<textarea name="methodology" rows="4"></textarea></label>
+            <label>Certifications<textarea name="certifications" rows="4"></textarea></label>
+            <label>Tax Classification<textarea name="taxClassification" rows="4"></textarea></label>
+          </div>
+          <div class="inline">
+            <input id="find-text" placeholder="Find" />
+            <input id="replace-text" placeholder="Replace" />
+            <button id="find-replace" type="button">Find & Replace</button>
+          </div>
+          <button id="save-narrative" type="button">Save Narrative</button>
+        </div>
+
+        <div class="card">
+          <h2>6. Depreciation Line Items</h2>
+          <table class="line-items">
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Qty</th>
+                <th>Unit Cost</th>
+                <th>Total</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="line-items-body"></tbody>
+          </table>
+          <button id="add-line-item" type="button">Add Line Item</button>
+          <div class="totals" id="line-item-totals"></div>
+          <button id="save-line-items" type="button">Save Line Items</button>
+        </div>
+      </section>
+
+      <section class="grid">
+        <div class="card">
+          <h2>7. Swap Cover Photo</h2>
+          <form id="cover-form">
+            <input type="file" name="cover" accept="image/*" />
+            <button type="submit">Upload Cover</button>
+          </form>
+          <div id="cover-preview" class="image-preview"></div>
+        </div>
+
+        <div class="card">
+          <h2>8. Export</h2>
+          <button id="export-pdf" type="button">Export Final PDF</button>
+          <button id="export-json" type="button">Export Report JSON</button>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
